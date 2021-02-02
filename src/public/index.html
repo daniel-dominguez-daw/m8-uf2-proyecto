@@ -7,8 +7,29 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js" integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ==" crossorigin="anonymous"></script>
 </head>
 <body>
-    <div id="content">
+    <div id="content" class="calculator-grid">
         <!-- Interfaz aquí -->
+		<div class="output">
+			<div data-previous-operand class="previous-operand"></div>
+			<div data-current-operand class="current-operand"></div>
+		</div>
+		<button data-all-clear id="reset" class="span-three">RESET</button>
+		<button data-operation class="operation">÷</button>
+		<button data-number class="number">1</button>
+		<button data-number class="number">2</button>
+		<button data-number class="number">3</button>
+		<button data-operation class="operation">*</button>
+		<button data-number class="number">4</button>
+		<button data-number class="number">5</button>
+		<button data-number class="number">6</button>
+		<button data-operation class="operation">+</button>
+		<button data-number class="number">7</button>
+		<button data-number class="number">8</button>
+		<button data-number class="number">9</button>
+		<button data-operation class="operation">-</button>
+		<button data-number class="number">.</button>
+		<button data-number class="number">0</button>
+		<button data-equals id="equals" class="span-two">=</button>
     </div>
     <script type="text/javascript" src="js/main.js"></script>
 </body>
