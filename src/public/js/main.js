@@ -93,7 +93,7 @@ var Calc = function() {
         var calc = this;
         const fun = function(e) {
             if(calc.op1.length <= 0) return;
-            if(this.innerHTML.match(/[\+\-\*\/]/)) calc.operation = this.innerHTML;
+            if(this.innerHTML.match(/[\+\-\*\/÷]/)) calc.operation = this.innerHTML;
             console.log('operation clicked');
             calc.render();
         };
@@ -161,6 +161,9 @@ var Calc = function() {
                     case "/":
                         apiOperation = this.api.divide;
                         break;
+                    case "÷":
+                        apiOperation = this.api.divide;
+                        break;
                     default:
                         apiOperation = this.api.suma;
                 }
@@ -176,6 +179,7 @@ var Calc = function() {
 
 (function() {
     // mock UI
+    /*
     (function(){
         const UI = `
         <button id="reset">AC</button>
@@ -199,6 +203,7 @@ var Calc = function() {
         `;
         document.getElementsByTagName("body")[0].innerHTML = UI;
     }());
+    */
 
     // API servers
     const mockServer = {
