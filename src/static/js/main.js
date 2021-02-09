@@ -213,11 +213,11 @@ var Calc = function() {
     };
     const realServer = {
         protocol: 'http',
-        host: 'localhost:8080',
+        host: 'localhost:5050',
         basePath: 'calc/',
     };
 
-    const apiCfg = Object.assign({...mockServer}, {
+    const apiCfg = Object.assign({...realServer}, {
         resultKey: 'result'
     });
 
