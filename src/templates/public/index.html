@@ -3,13 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>Calculadora con API</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/styles.css') }}">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js" integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ==" crossorigin="anonymous"></script>
 </head>
 <body>
     <div id="content">
         <!-- Interfaz aquí -->
+    <h1>hello world!</h1>
     </div>
-    <script type="text/javascript" src="js/main.js"></script>
+    <script type="text/javascript" src="{{ url_for('static',filename='js/main.js') }}"></script>
 </body>
 </html>

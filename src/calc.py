@@ -1,17 +1,22 @@
 import os
 
-from flask import Flask, jsonify
+from flask import Flask, jsonify, render_template
 from flask_basicauth import BasicAuth
 
-app = Flask(__name__)
+app = Flask(__name__,static_url_path='/static')
 
 app.config['BASIC_AUTH_USERNAME'] = 'daw'
 app.config['BASIC_AUTH_PASSWORD'] = 'prova'
 
 basic_auth = BasicAuth(app)
 
-@app.route('/suma/<op1>/<op2>')
+@app.route('/')
 @basic_auth.required
+def access_calc():
+    return render_template('public/index.html')
+
+@app.route('/suma/<op1>/<op2>')
+# @basic_auth.required
 def suma(op1, op2):
     n_op1 = float(op1)
     n_op2 = float(op2)
@@ -19,7 +24,7 @@ def suma(op1, op2):
     return jsonify(resultat), 200
 
 @app.route('/resta/<op1>/<op2>')
-@basic_auth.required
+# @basic_auth.required
 def resta(op1, op2):
     n_op1 = float(op1)
     n_op2 = float(op2)
@@ -27,7 +32,7 @@ def resta(op1, op2):
     return jsonify(resultat), 200
 
 @app.route('/multiplicacio/<op1>/<op2>')
-@basic_auth.required
+# @basic_auth.required
 def multiplicacio(op1, op2):
     n_op1 = float(op1)
     n_op2 = float(op2)
@@ -35,7 +40,7 @@ def multiplicacio(op1, op2):
     return jsonify(resultat), 200
 
 @app.route('/divisio/<op1>/<op2>')
-@basic_auth.required
+# @basic_auth.required
 def divisio(op1, op2):
     n_op1 = float(op1)
     n_op2 = float(op2)
