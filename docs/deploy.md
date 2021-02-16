@@ -154,7 +154,11 @@ Como apache no va a servir ningún archivo estático salvo el error 503, esta es
 </VirtualHost>
 ```
 
-Creamos el archivo html de error 503 para cuando el proxy esté en problemas
+También se puede encontrar en la raíz del repositorio `etc/calc.conf`.
+
+Recordar que si se copia tal cual en la carpeta de apache sites-available se ha de hacer un `a2ensite calc`. Recordar también que solo puede haber una configuración con el puerto 8080 (salvo que se utilicen nombres de dominio) por lo tanto quizás hay que desactivar otras configuraciones o elegir otro puerto diferente.
+
+Creamos el archivo html de error 503 para cuando el proxy esté en problemas.
 
 ```bash
 mkdir /var/www/error
@@ -182,9 +186,13 @@ Simplemente visitamos http://localhost:8080/ desde un navegador si utilizamos ub
 
 ## Resolución de problemas
 
-En caso de que el Flask caiga, devolverá una página con un error 503. Este error nos aparecerá en los logs de apache también.
+No debería ocurrir pero en caso de que se intente acceder a una ruta que no está contemplada en la aplicación Flask el servidor devolverá un error de cliente 404 Not Found.
 
-Para solucionarlo simplemente hay que volver a levantar Flask.
+En el caso de que Flask caiga o diera algún tipo de error de servidor (que en principio no debería), devolverá un error 503 el cual apache2 nos ofrecerá una página estática de error. Este error nos aparecerá también en los logs de apache.
+
+En caso de error 503, se debe comprobar si la aplicación Flask está caída. Para ello podemos utilizar el comando `ps aux | grep flask`. Nos listará el listado de procesos por si queremos además realizar un `kill` pasándole el id del proceso.
+
+En caso que esté caído, para solucionarlo simplemente hay que volver a levantar Flask.
 
 ```bash
 cd ~/calc/src
