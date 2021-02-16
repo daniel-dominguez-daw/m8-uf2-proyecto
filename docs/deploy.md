@@ -53,17 +53,17 @@
 
 ## Contenidos
 
-1. [¿Qué es esta documentación?]
-2. [Instalación de paquetes ubuntu]
-3. [Obtener los archivos fuente]
-4. [Preparar aplicación Flask]
-    1. [Instalación de módulos de python3]
-    2. [Ejecución del Flask http server]
-5. [Preparar Apache como proxy]
-    1. [Activar módulos de apache]
-    2. [Configuración de virtualhost de apache2]
-    3. [Probar Proxy Apache]
-6. [Resolución de problemas]
+1. ¿Qué es esta documentación?
+2. Instalación de paquetes ubuntu
+3. Obtener los archivos fuente
+4. Preparar aplicación Flask
+    1. Instalación de módulos de python3
+    2. Ejecución del Flask http server
+5. Preparar Apache como proxy
+    1. Activar módulos de apache
+    2. Configuración de virtualhost de apache2
+    3. Probar Proxy Apache
+6. Resolución de problemas
 
 ## ¿Qué es esta documentación?
 
