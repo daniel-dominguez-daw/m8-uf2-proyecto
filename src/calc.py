@@ -13,32 +13,32 @@ basic_auth = BasicAuth(app)
 def access_calc():
     return render_template('index.html')
 
-@app.route('/calc/suma/<op1>/<op2>')
+@app.route('/calc/suma/<op1>/<op2>/')
 def suma(op1, op2):
     n_op1 = float(op1)
     n_op2 = float(op2)
-    resultat = {'operador': 'suma','resultat ' : n_op1 + n_op2}
+    resultat = {'result': n_op1 + n_op2}
     return jsonify(resultat), 200
 
-@app.route('/calc/resta/<op1>/<op2>')
+@app.route('/calc/resta/<op1>/<op2>/')
 def resta(op1, op2):
     n_op1 = float(op1)
     n_op2 = float(op2)
-    resultat = {'operador': 'resta','resultat ' : n_op1 - n_op2}
+    resultat = {'result': n_op1 - n_op2}
     return jsonify(resultat), 200
 
-@app.route('/calc/multiplica/<op1>/<op2>')
+@app.route('/calc/multiplica/<op1>/<op2>/')
 def multiplicacio(op1, op2):
     n_op1 = float(op1)
     n_op2 = float(op2)
-    resultat = {'operador': 'multiplicacio','resultat ' : n_op1 * n_op2}
+    resultat = {'result': n_op1 * n_op2}
     return jsonify(resultat), 200
 
-@app.route('/calc/divisio/<op1>/<op2>')
+@app.route('/calc/divide/<op1>/<op2>/')
 def divisio(op1, op2):
     n_op1 = float(op1)
     n_op2 = float(op2)
-    resultat = {'operador': 'divisio','resultat ' : n_op1 / n_op2}
+    resultat = {'result': n_op1 / n_op2}
     return jsonify(resultat), 200
 
 if __name__=='__main__':
