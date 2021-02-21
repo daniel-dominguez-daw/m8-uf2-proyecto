@@ -99,9 +99,9 @@ o bien descargar:
 
 Usando git o descargando los sources desde el archivo zip dejaremos los archivos bajo la carpeta home por ejemplo `~/calc/src/`.
 
-## Preparar aplicación Flask
+## 4. Preparar aplicación Flask
 
-### Instalación de módulos de python3
+### 4.1 Instalación de módulos de python3
 
 Se debe crear un entorno virtual de python3 donde instalaremos los módulos necesarios para hacer funcionar la API Flask.
 
@@ -117,7 +117,7 @@ A continuación hay que instalar las dependencias de python.
 (env) $ pip3 install -r requirements.txt
 ```
 
-### Ejecución del Flask http server
+### 4.2 Ejecución del Flask http server
 
 Ejecución en segundo plano.
 
@@ -135,9 +135,9 @@ curl localhost:5050/calc/suma/2/3/
 
 Ahora que funciona la aplicación Flask se debe configurar apache para servir esto desde el 8080.
 
-## Preparar Apache como proxy
+## 5. Preparar Apache como proxy
 
-### Activar módulos de apache
+### 5.1 Activar módulos de apache
 
 Para redirigir el tráfico de apache a Flask se deben activar los mods `proxy` y `proxy_http`.
 
@@ -147,7 +147,7 @@ $ sudo a2enmod proxy_http
 $ sudo systemctl restart apache2
 ```
 
-### Configuración de virtualhost de apache2
+### 5.2 Configuración de virtualhost de apache2
 
 Como apache no va a servir ningún archivo estático salvo el error 503, esta es la configuración de virtualhost necesaria.
 
@@ -217,7 +217,7 @@ El contenido del archivo `503.html` debe ser similar al mostrado a continuación
 </html>
 ```
 
-### Probar Proxy Apache
+### 5.3 Probar Proxy Apache
 
 Simplemente visitamos http://localhost:8080/ desde un navegador si lo tenemos todo en el mismo server, si se ha utilizado una máquina virtual ubuntu server, se deberá entrar mediante http://direcciónip:8080/.
 
@@ -227,7 +227,7 @@ Una vez autenticados nos aparecerá la aplicación con la calculadora.
 
 Se puede seguir la guía de pruebas checklist que encontrarás en la carpeta `docs/`.
 
-## Resolución de problemas
+## 6. Resolución de problemas
 
 No debería ocurrir pero en caso de que se intente acceder a una ruta que no está contemplada en la aplicación Flask el servidor devolverá un error de cliente 404 Not Found.
 
