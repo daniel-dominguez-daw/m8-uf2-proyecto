@@ -213,7 +213,7 @@ var Calc = function() {
     };
     const realServer = {
         protocol: 'http',
-        host: 'localhost:5050',
+        host: window.location.host,
         basePath: 'calc/',
     };
 

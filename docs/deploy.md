@@ -65,7 +65,7 @@
     3. Probar Proxy Apache
 6. Resolución de problemas
 
-## ¿Qué es esta documentación?
+## 1. ¿Qué es esta documentación?
 
 Pasos a seguir para desplegar una aplicación web Flask que se sirve por apache a través de un proxy.
 
@@ -73,7 +73,7 @@ Esta documentación también se puede leer a través de GitHub (se recomienda).
 
 (Guía deploy Github)[https://github.com/daniel-dominguez-daw/m8-uf2-proyecto/blob/main/docs/deploy.md]
 
-## Instalación de paquetes ubuntu
+## 2. Instalación de paquetes ubuntu
 
 Partimos de un sistema Ubuntu 20.04. Se deben instalar los siguientes paquetes en el servidor.
 
@@ -84,9 +84,16 @@ Partimos de un sistema Ubuntu 20.04. Se deben instalar los siguientes paquetes e
 - Python3: `sudo apt install python3`
 
 
-## Obtener los archivos fuente
+## 3. Obtener los archivos fuente
 
 (Opcional) Si hemos decidido usar Git podemos traer el código fuente tanto de la aplicación cliente como de la aplicación servidor que están alojadas en el repositorio github `https://github.com/daniel-dominguez-daw/m8-uf2-proyecto/`, sino podemos utilizar un simple unzip.
+
+```
+cd ~
+git clone https://github.com/daniel-dominguez-daw/m8-uf2-proyecto.git calc
+```
+
+o bien descargar:
 
 `https://github.com/daniel-dominguez-daw/m8-uf2-proyecto/archive/main.zip`
 
@@ -122,7 +129,7 @@ python3 calc.py &
 Probamos con curl:
 
 ```bash
-curl localhost:5050/suma/2/3/
+curl localhost:5050/calc/suma/2/3/
 # {'result': 5}
 ```
 
@@ -158,12 +165,42 @@ También se puede encontrar en la raíz del repositorio `etc/calc.conf`.
 
 Recordar que si se copia tal cual en la carpeta de apache sites-available se ha de hacer un `a2ensite calc`. Recordar también que solo puede haber una configuración con el puerto 8080 (salvo que se utilicen nombres de dominio) por lo tanto quizás hay que desactivar otras configuraciones o elegir otro puerto diferente.
 
+Pasos a seguir:
+
+```
+sudo cp ~/calc/etc/calc.conf /etc/apache2/sites-available/
+
+# desactivar sitios que utilicen el puerto 8080, por ejemplo
+sudo a2dissite daw2m8
+sudo a2dissite cualquierotro
+
+# activar calc
+sudo a2ensite calc
+
+sudo systemctl reload apache2
+```
+
+Probamos:
+
+```bash
+# Apache
+(env) daw@daw:/etc/apache2/sites-available$ curl localhost:8080/calc/suma/2/2/
+127.0.0.1 - - [21/Feb/2021 16:09:00] "GET /calc/suma/2/2/ HTTP/1.1" 200 -
+{"result":4.0}
+
+# Flask
+(env) daw@daw:/etc/apache2/sites-available$ curl localhost:5050/calc/suma/2/2/
+127.0.0.1 - - [21/Feb/2021 16:09:07] "GET /calc/suma/2/2/ HTTP/1.1" 200 -
+{"result":4.0}
+```
+
+
 Creamos el archivo html de error 503 para cuando el proxy esté en problemas.
 
 ```bash
-mkdir /var/www/error
-touch /var/www/error/503.html
-vim /var/www/error/503.html
+sudo mkdir /var/www/error
+sudo touch /var/www/error/503.html
+sudo vim /var/www/error/503.html
 ```
 
 El contenido del archivo `503.html` debe ser similar al mostrado a continuación
@@ -182,7 +219,13 @@ El contenido del archivo `503.html` debe ser similar al mostrado a continuación
 
 ### Probar Proxy Apache
 
-Simplemente visitamos http://localhost:8080/ desde un navegador si utilizamos ubuntu, sino podemos usar el navegador de terminal links o curl.
+Simplemente visitamos http://localhost:8080/ desde un navegador si lo tenemos todo en el mismo server, si se ha utilizado una máquina virtual ubuntu server, se deberá entrar mediante http://direcciónip:8080/.
+
+Nos pedirá autentificarnos, las credenciales de prueba son `daw:prova`, se pueden cambiar en el archivo `src/calc.py`.
+
+Una vez autenticados nos aparecerá la aplicación con la calculadora.
+
+Se puede seguir la guía de pruebas checklist que encontrarás en la carpeta `docs/`.
 
 ## Resolución de problemas
 
@@ -198,3 +241,13 @@ En caso que esté caído, para solucionarlo simplemente hay que volver a levanta
 cd ~/calc/src
 python3 calc.py &
 ```
+
+Si Flask todavía estuviera corriendo es recomendable matar el proceso. Para ello se debe usar:
+
+```
+ps aux | grep python3
+kill ID_DEL_PROCESO
+```
+
+Luego levantar de nuevo `python3 ~/calc/src/calc.py &`
+
